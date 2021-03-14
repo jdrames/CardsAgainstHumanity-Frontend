@@ -1,60 +1,48 @@
 <template>
   <v-app>
     <v-app-bar
-      app
-      color="primary"
+      app      
       dark
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        <h2 class="mr-4">Force<span class="red--text text--darken-3 ">MX</span></h2>
+        <div class="d-flex-inline hidden-sm-and-down text-right">
+          <i><small><q>Some sort of experience</q></small></i>
+          <br />
+          - Grumpy Old Man
+        </div>
       </div>
 
       <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      
+      <span v-if="$store.state.name" class="hidden-xs-only">{{$store.state.name}}</span>
+      <v-btn color="primary darken-3" class="ml-2" title="Get Started" v-if="!$store.state.token">Get Started</v-btn>
+      <v-btn color="green darken-3" class="ml-2" title="Host A New Game" v-if="$store.state.token">Host Game</v-btn> 
+      <v-btn color="primary darken-3" class="ml-2" title="Join A Game" v-if="$store.state.token">Join Game</v-btn>
+      <v-btn icon class="ml-2" title="Logout" @click="signOut" v-if="$store.state.token"><v-icon color="red">mdi-logout</v-icon></v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    //
   },
 
   data: () => ({
     //
   }),
+  methods:{
+    signOut(){
+      this.$store.dispatch('doLogout');
+    }
+  }
 };
 </script>
