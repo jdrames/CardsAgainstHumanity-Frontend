@@ -49,9 +49,9 @@
                 Gather up your friends online and start up a game. Have your
                 friends join the game and let the good times roll.            
             <v-card-actions class="justify-center">
-              <v-btn color="primary darken-3" title="Get Started" v-if="!$store.state.token">Get Started</v-btn>
-              <v-btn color="green darken-3" title="Host A New Game" v-if="$store.state.token">Host Game</v-btn> 
-              <v-btn color="primary darken-3" title="Join A Game" v-if="$store.state.token">Join Game</v-btn>
+              <GetStartedBtn v-if="!$store.state.token" />
+              <HostGameBtn v-if="$store.state.token" />
+              <JoinGameBtn v-if="$store.state.token" />                            
             </v-card-actions>
           </v-card>
         </v-layout>
@@ -59,8 +59,7 @@
 
       <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Suggested Links</h2>
-
-        <v-row justify="center">
+        <v-layout justify="center">
           <v-col cols="12">
             <v-btn
               target="_blank"
@@ -93,19 +92,19 @@
             </v-btn>
             <br />
           </v-col>
-        </v-row>
+        </v-layout>
       </v-col>
 
       <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Disclaimer</h2>
-        <v-row justify="center">
+        <v-layout justify-center>
           <i>
             This site is not associated with, endorsed, or sponsored by the
             makers of Cards Against Humanity.<br />
             Their cards are used under the Creative Commons License. This
             site/service is provided free of charge.</i
           >
-        </v-row>
+        </v-layout>
       </v-col>
     </v-row>
   </v-container>
@@ -114,9 +113,16 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+import GetStartedBtn from '@/components/GetStartedBtn.vue'
+import HostGameBtn from '@/components/HostGameBtn.vue'
+import JoinGameBtn from '@/components/JoinGameBtn.vue'
 
 export default {
   name: "Home",
-  components: {},
+  components: {
+    GetStartedBtn,
+    HostGameBtn,
+    JoinGameBtn
+  },
 };
 </script>

@@ -16,9 +16,9 @@
       <v-spacer></v-spacer>
       
       <span v-if="$store.state.name" class="hidden-xs-only">{{$store.state.name}}</span>
-      <v-btn color="primary darken-3" class="ml-2" title="Get Started" v-if="!$store.state.token">Get Started</v-btn>
-      <v-btn color="green darken-3" class="ml-2" title="Host A New Game" v-if="$store.state.token">Host Game</v-btn> 
-      <v-btn color="primary darken-3" class="ml-2" title="Join A Game" v-if="$store.state.token">Join Game</v-btn>
+      <GetStartedBtn v-if="!$store.state.token" />
+      <HostGameBtn v-if="$store.state.token" />
+      <JoinGameBtn v-if="$store.state.token" />
       <v-btn icon class="ml-2" title="Logout" @click="signOut" v-if="$store.state.token"><v-icon color="red">mdi-logout</v-icon></v-btn>
     </v-app-bar>
 
@@ -29,11 +29,16 @@
 </template>
 
 <script>
+import GetStartedBtn from '@/components/GetStartedBtn.vue'
+import HostGameBtn from '@/components/HostGameBtn.vue'
+import JoinGameBtn from '@/components/JoinGameBtn.vue'
 
 export default {
   name: 'App',
   components: {
-    //
+    GetStartedBtn,
+    HostGameBtn,
+    JoinGameBtn
   },
 
   data: () => ({
