@@ -1,3 +1,6 @@
+# WORK IN PROGRESS #
+This is a re-write of the version currently in use on the [ForceMX](https://www.forcemx.com) website.
+
 # Cards Against Humanity Online
 A vue.js frontend for the Cards Against Humanity server.
 
