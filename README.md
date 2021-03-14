@@ -6,7 +6,7 @@ A vue.js frontend for the Cards Against Humanity server.
 npm install
 ```
 ### Customize configuration
-Edit the `src/sites.js` file to match your hosing environment.
+Edit the `src/sites.js` file to match your hosting environment.
 
 ### Compiles and hot-reloads for development
 ```
