@@ -1,9 +1,12 @@
-# cah-web
+# Cards Against Humanity Online
+A vue.js frontend for the Cards Against Humanity server.
 
 ## Project setup
 ```
 npm install
 ```
+### Customize configuration
+Edit the `src/sites.js` file to match your hosing environment.
 
 ### Compiles and hot-reloads for development
 ```
@@ -20,5 +23,4 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
