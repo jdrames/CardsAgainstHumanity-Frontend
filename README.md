@@ -1,5 +1,6 @@
 # WORK IN PROGRESS #
-This is a re-write of the version currently in use on the [ForceMX](https://www.forcemx.com) website.
+This is a re-write of the version currently in use on the [ForceMX](https://www.forcemx.com) website.  
+This heading will be removed once integrated into Jenkins CI for production site.
 
 # Cards Against Humanity Online
 A vue.js frontend for the Cards Against Humanity server.
