@@ -24,6 +24,9 @@
 
     <v-main>
       <router-view />
+      <JoinGameDialog />
+      <HostGameDialog />
+      <NetworkErrorDialog />
     </v-main>
   </v-app>
 </template>
@@ -32,13 +35,19 @@
 import GetStartedBtn from '@/components/GetStartedBtn.vue'
 import HostGameBtn from '@/components/HostGameBtn.vue'
 import JoinGameBtn from '@/components/JoinGameBtn.vue'
+import JoinGameDialog from '@/components/JoinGameDialog.vue'
+import HostGameDialog from '@/components/HostGameDialog.vue'
+import NetworkErrorDialog from '@/components/NetworkErrorDialog.vue'
 
 export default {
   name: 'App',
   components: {
     GetStartedBtn,
     HostGameBtn,
-    JoinGameBtn
+    JoinGameBtn,
+    JoinGameDialog,
+    HostGameDialog,
+    NetworkErrorDialog
   },
 
   data: () => ({

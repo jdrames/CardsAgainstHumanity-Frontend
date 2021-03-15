@@ -6,7 +6,7 @@
       </v-col>
 
       <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">Easy As One and Done</h2>
+        <h2 class="headline font-weight-bold mb-3">Easy as One and Done</h2>
         <v-layout justify-center>
             <v-form v-model="valid" @submit.prevent>
           <v-card max-width="500" color="transparent" flat>
@@ -49,33 +49,19 @@
         </v-layout>
       </v-col>
     </v-row>
-    <v-dialog v-model="errorModal" max-width="500">
-        <v-card light>
-            <v-card-title class="headline">
-                <v-icon large color="red" class="mr-2">mdi-alert</v-icon> Oh No! 
-            </v-card-title>
-            <v-card-text>
-                Something has gone wrong. We tried executing the request but the system just wasn't having
-                any of it today. You can close this dialog and try again. If the problem persists please
-                reach out to support.
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary darken-2" @click="errorModal = false">Close</v-btn>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
   </v-container>
 </template>
 
 <script>
+import bus from '../scripts/eventBus'
+
 const regex = new RegExp("^[a-zA-Z0-9''_']{3,15}$");
+
 export default {
     name: "Get-Started",
     data: ()=>({
         valid: false,
-        username: "",
-        errorModal: false,
+        username: "",        
         loading: false,
         rules:{
             required: value => !!value || 'Required.',
@@ -97,12 +83,16 @@ export default {
                 this.$router.push("/");
             }catch (error){                
                 if(this.$mode == 'dev') console.error(error);
-                this.errorModal = true;
+                bus.$emit("showNetworkDialog", true);
             }
             this.loading = false;
         }
     },
     mounted(){
+        // No reason for the user to be here if they are already authenticated
+        if(this.$store.state.token && this.$store.state.name && this.$store.state.id)
+            this.$router.push("/");
+
         this.$refs.username.focus();
     }
 }

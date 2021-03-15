@@ -1,5 +1,25 @@
 <template>
-    <div class="ml-2">
-    <v-btn color="primary darken-3" title="Join A Game">Join Game</v-btn>    
-    </div>
+  <div class="ml-2">
+    <v-btn
+      color="primary darken-3"
+      title="Join A Game"
+      @click="showJoinDialog"
+      v-if="$route.path != '/game'"
+      >Join Game</v-btn
+    >    
+  </div>
 </template>
+<script>
+import bus from '../scripts/eventBus'
+
+export default {
+  data: () => ({
+    //
+  }),
+  methods: {
+    showJoinDialog() {
+      bus.$emit('showJoinDialog', true);
+    },
+  }
+};
+</script>

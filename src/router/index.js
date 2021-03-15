@@ -16,14 +16,6 @@ const routes = [
     name: 'Get-Started',
     component: () => import(/* webpackChunkName: "getstarted" */ '../views/Getstarted.vue')    
   },
-  {
-    path: '/host',
-    name: 'Host-Game',
-    component: () => import(/* webpackChunkName: "hostgame" */ '../views/Hostgame.vue'),
-    meta:{
-      requiresAuth: true
-    }
-  }  
 ]
 
 const router = new VueRouter({
