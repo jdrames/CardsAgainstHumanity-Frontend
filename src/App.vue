@@ -47,6 +47,8 @@ export default {
   methods:{
     signOut(){
       this.$store.dispatch('doLogout');
+      // route back to the homepage if they aren't already on it.      
+      if(this.$route.path != '/') this.$router.push('/');
     }
   }
 };
