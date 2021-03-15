@@ -17,6 +17,7 @@ axios.interceptors.request.use(request=>{
   return request;
 });
 Vue.prototype.$axios = axios;
+Vue.prototype.$mode = Vue.config.devtools ? 'dev' : 'prod';
 
 // Use the gamehub plugin for SignalR
 Vue.use(gamehub);
