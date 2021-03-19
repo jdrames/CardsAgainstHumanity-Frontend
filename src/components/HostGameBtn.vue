@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-2">
+  <div class="ml-2" v-if="$route.path != '/games'">
     <v-btn
       color="green darken-3"
       title="Host A New Game"

@@ -73,7 +73,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="warning" @click="showHostDialog = false">Close</v-btn>
-        <v-btn color="primary darken-2">Create Game</v-btn>
+        <v-btn color="primary darken-2" @click="createGame" :loading="loading">Create Game</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -84,6 +84,7 @@ import Packs from "../assets/cardpacks.js";
 
 export default {
   data: () => ({
+    loading: false,
     packOptions: {
       favorites: { col1: [], col2: [] },
       remaining: { col1: [], col2: [] },
@@ -92,6 +93,7 @@ export default {
     selectedPacks: [0],
   }),
   mounted() {
+    console.log(bus);
     // listen for show dialog event
     bus.$on("showHostDialog", (value) => {
       this.showHostDialog = value;
@@ -112,6 +114,21 @@ export default {
       if (index % 2 != 0) this.packOptions.remaining.col2.push(cur);
       else this.packOptions.remaining.col1.push(cur);
     });
+  },
+  methods: {
+    async createGame() {
+      this.loading = true;
+      try {
+        var response = (await this.$axios.post('games', {packs: this.selectedPacks})).data;
+        if(this.$mode == 'dev') console.log(response);
+        this.$router.push({path: "/games", query: {id:response.id, code:response.code}, replace: true});
+        this.showHostDialog = false;
+      } catch (error) {
+        if (this.$mode == "dev") console.error(error.headers);
+        bus.$emit("showNetworkDialog", true);
+      }
+      this.loading = false;
+    },
   },
 };
 </script>

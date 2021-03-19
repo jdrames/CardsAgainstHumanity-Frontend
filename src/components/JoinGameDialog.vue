@@ -10,9 +10,9 @@
         <v-form v-model="valid" @submit.prevent class="mt-3" ref="joinGameForm">
           <v-text-field
             label="Game Id"
-            counter="15"
+            counter="25"
             v-model="formData.id"
-            maxlength="15"
+            maxlength="25"
             :rules="[rules.required, rules.counterid, rules.content]"
           />
 
@@ -28,7 +28,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="warning" @click="close">Close</v-btn>
-        <v-btn color="primary darken-2" :disabled="!valid">Join Game</v-btn>
+        <v-btn color="primary darken-2" :disabled="!valid" :loading="loading" @click="joinGame">Join Game</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -36,7 +36,7 @@
 <script>
 import bus from "../scripts/eventBus";
 
-const regex = new RegExp("^[a-zA-Z0-9_-]{8,15}$");
+const regex = new RegExp("^[a-zA-Z0-9_-]{8,21}$");
 
 export default {
   data: () => ({
@@ -48,17 +48,28 @@ export default {
     rules: {
       required: (value) => !!value || "Required.",
       counterid: (value) =>
-        value.length == 15 || "Must be 15 characters long.",
+        value.length > 9 || "Must be 15 characters long.",
       countercode: (value) =>
         value.length == 8 || "Must be 8 characters long.",
       content: (value) =>
         regex.test(value) || "Can only contain letters numbers and underscore.",
     },
-    loading: true,
-    errorDialog: false,
+    loading: false,    
     showJoinDialog: false,
   }),
   methods: {
+    async joinGame(){
+      this.loading = true;
+      try{
+        var response = await this.$axios.post(`games/${this.formData.id}`, {id: this.formData.id, code: this.formData.code});
+        if(this.$mode == 'dev') console.log("Join Response", response);
+        this.$router.push({path: "/games", query:{id:this.formData.id}, replace: true});
+		this.showJoinDialog = false;
+      }catch(error){
+        console.error(error);
+      }
+      this.loading = false;
+    },
     close() {
       this.$refs.joinGameForm.resetValidation();
       this.showJoinDialog = false;

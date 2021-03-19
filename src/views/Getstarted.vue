@@ -77,7 +77,7 @@ export default {
         async login(){
             this.loading = true;
             try{
-                var response = (await this.$axios.post('auth', {Username: this.username})).data;
+                var response = (await this.$axios.post('auth', {name: this.username})).data;
                 if(this.$mode == 'dev') console.log(response);
                 this.$store.dispatch('doLogin', response);
                 this.$router.push("/");

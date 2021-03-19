@@ -1,10 +1,9 @@
 <template>
-  <div class="ml-2">
+  <div class="ml-2" v-if="$route.path != '/games'">
     <v-btn
       color="primary darken-3"
       title="Join A Game"
-      @click="showJoinDialog"
-      v-if="$route.path != '/game'"
+      @click="showJoinDialog"      
       >Join Game</v-btn
     >    
   </div>

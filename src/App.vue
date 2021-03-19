@@ -19,11 +19,12 @@
       <GetStartedBtn v-if="!$store.state.token" />
       <HostGameBtn v-if="$store.state.token" />
       <JoinGameBtn v-if="$store.state.token" />
+      <ReturnHomeBtn />
       <v-btn icon class="ml-2" title="Logout" @click="signOut" v-if="$store.state.token"><v-icon color="red">mdi-logout</v-icon></v-btn>
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <router-view :key="$route.fullPath" />
       <JoinGameDialog />
       <HostGameDialog />
       <NetworkErrorDialog />
@@ -38,6 +39,7 @@ import JoinGameBtn from '@/components/JoinGameBtn.vue'
 import JoinGameDialog from '@/components/JoinGameDialog.vue'
 import HostGameDialog from '@/components/HostGameDialog.vue'
 import NetworkErrorDialog from '@/components/NetworkErrorDialog.vue'
+import ReturnHomeBtn from '@/components/ReturnHomeBtn.vue'
 
 export default {
   name: 'App',
@@ -47,7 +49,8 @@ export default {
     JoinGameBtn,
     JoinGameDialog,
     HostGameDialog,
-    NetworkErrorDialog
+    NetworkErrorDialog,
+    ReturnHomeBtn
   },
 
   data: () => ({
@@ -62,3 +65,8 @@ export default {
   }
 };
 </script>
+<style>
+.v-main{
+	background: #4d4c4c !important;
+}
+</style>

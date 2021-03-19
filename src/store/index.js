@@ -11,16 +11,16 @@ export default new Vuex.Store({
   },
   mutations: {
     setUser(state, payload){
-      state.id = payload?.user?.id;
-      state.name = payload?.user?.name;      
+      state.id = payload?.id;
+      state.name = payload?.name;      
       state.token = payload?.token;
     },
   },
   actions: {
     doLogin(context, payload){
       context.commit("setUser", payload);
-      localStorage.setItem("id", payload?.user?.id);
-      localStorage.setItem("name", payload?.user?.name);      
+      localStorage.setItem("id", payload?.id);
+      localStorage.setItem("name", payload?.name);      
       localStorage.setItem("token", payload?.token);
     },
     doLogout(context){
